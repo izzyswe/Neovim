@@ -14,7 +14,7 @@ or download it as zip
 5. should download and load all mason and LazyVim configurations
 6. happy coding!
 
-### INCLUDED LSP
+## INCLUDED LSP
 - PHP
 - Java (must install gradle to properly make java projects)
 - Python
@@ -28,7 +28,7 @@ or download it as zip
 - harper
 - emmet
 
-# INCLUDED PLUGINS
+## INCLUDED PLUGINS
 -`lazy.nvim`
 - `Mason.nvim`
 - `lspconfig.nvim`
