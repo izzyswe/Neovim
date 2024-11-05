@@ -54,7 +54,7 @@ or download it as zip
 
 Keybinds will be linked if interested.
 
-## Resources <br>
+## Neovim Configuration Resources <br>
 https://neovim.io/doc/ <br>
 https://www.lazyvim.org/configuration/plugins <br>
 https://github.com/williamboman/mason-lspconfig.nvim <br>
