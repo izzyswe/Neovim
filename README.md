@@ -1,8 +1,8 @@
-# Neovim-config
+# Neovim
 
 this is my personal all-in-one setup
 
-# HOW TO INSTALL AND USE 
+# HOW TO INSTALL AND USE MY CONFIGURATION
 
 you can download using `git clone https://github.com/izzyswe/Neovim-config.git`
 or download it as zip
