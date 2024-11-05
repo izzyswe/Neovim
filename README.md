@@ -16,7 +16,7 @@ or download it as zip
 
 ### INCLUDED LSP
 - PHP
-- Java (must install gradle to make projects)
+- Java (must install gradle to properly make java projects)
 - Python
 - Golang
 - Lua
