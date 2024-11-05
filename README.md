@@ -2,6 +2,8 @@
 
 this is my personal all-in-one setup
 
+<img width="1797" alt="Screenshot 2024-11-05 at 2 10 31 PM" src="https://github.com/user-attachments/assets/5b21c7af-ded0-464b-8953-4f2ff7a8bd93">
+
 # HOW TO INSTALL AND USE MY CONFIGURATION
 
 you can download using `git clone https://github.com/izzyswe/Neovim-config.git`
