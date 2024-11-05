@@ -31,7 +31,7 @@ or download it as zip
 - emmet
 
 ## INCLUDED PLUGINS
--`lazy.nvim`
+- `lazy.nvim`
 - `Mason.nvim`
 - `lspconfig.nvim`
 - `alpha.nvim`
