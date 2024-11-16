@@ -28,8 +28,6 @@ return {
         close_on_exit = false,
         shell = vim.o.shell,
       })
-
-     
       -- Function to run the current file
       function _G.run_current_file()
         local file = vim.fn.expand("%")  -- Full path to current file
@@ -42,8 +40,14 @@ return {
          -- For Java files, find the project root
           local project_root = find_project_root()
           if project_root then
-            -- Run gradle build and run from the project root
-            cmd = "cd " .. project_root .. " && gradle build && gradle run"
+            -- Check if the current file is in the 'test' directory
+            if file:find("/test/") then
+              -- Run tests for the project
+              cmd = "cd " .. project_root .. " && gradle test"
+            else
+              -- Run gradle build and run from the project root
+              cmd = "cd " .. project_root .. " && gradle build && gradle run"
+            end
           else
             print("Could not find build.gradle")
             return

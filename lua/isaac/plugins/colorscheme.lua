@@ -1,4 +1,4 @@
-return {
+--[===[return {
   {
     "rmehri01/onenord.nvim",
     lazy = false,  -- Load the theme immediately
@@ -21,10 +21,27 @@ return {
       })
 
       -- Apply the colorscheme
-      vim.cmd([[colorscheme onenord]])
+      vim.cmd([[colorscheme onenord]]) 
     end,
   }
 }
+--]===]
+
+return {
+  {
+    "dgox16/oldworld.nvim",
+    lazy = false,  -- Load the theme immediately
+    priority = 1000,  -- Ensure it loads first
+    config = function()
+      -- Apply the OldWorld theme
+      vim.cmd.colorscheme("oldworld")
+    end,
+  }
+}
+
+
+
+
 
 
 
