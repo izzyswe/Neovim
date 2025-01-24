@@ -58,6 +58,8 @@ return {
           cmd = "go run " .. file
         elseif extension == "php" then
           cmd = "php " .. file
+        elseif extension == "cs" then
+          cmd = "dotnet build && dotnet run"
         elseif extension == "js" then
           cmd = "node " .. file
         elseif extension == "kt" then

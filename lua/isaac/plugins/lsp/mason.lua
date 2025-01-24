@@ -27,8 +27,8 @@ return {
         "cssls",
         "tailwindcss",
         "css_variables",
-        "golangci_lint_ls", --Golang
-        "gopls", -- Golang LSP
+       -- "golangci_lint_ls", --Golang
+       -- "gopls", -- Golang LSP
         -- "harper_ls", -- language grammar checker LSP
         "templ", --templ for Go LSP
         "ast_grep", -- LSP for JS, python, go, c#, c, kotlin, rust, typescript
@@ -41,16 +41,17 @@ return {
         "pylsp",
         "ts_ls",
       },
+      automatic_installation = true,
     })
 
     local mason_tool_installer = require("mason-tool-installer")
     mason_tool_installer.setup({
       ensure_installed = {
-        'gofumpt',
-        'golines',
-        'gomodifytags',
-        'gotests',
-        'gopls',
+        -- 'gofumpt',
+        -- 'golines',
+        -- 'gomodifytags',
+        -- 'gotests',
+        -- 'gopls',
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
         "isort", -- python formatter

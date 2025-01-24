@@ -5,6 +5,7 @@ return{
       require'live-server'.setup{
       -- Optional: Set the command to use for running the live server
       command = "live-server",
+     --cmd = { 'LiveServerStart', 'LiveServerStop' },
 
       -- Optional: Define file types that trigger the live server
       filetypes = {"html", "css", "javascript"}

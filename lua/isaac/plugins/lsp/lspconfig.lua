@@ -92,6 +92,18 @@ return {
           capabilities = capabilities,
         })
       end,
+      ["omnisharp"] = function()
+        lspconfig["omnisharp"].setup({
+        cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
+        capabilities = capabilities,
+        root_dir = require("lspconfig.util").root_pattern(".csproj", ".sln", ".git")(vim.fn.getcwd()),
+        settings = {
+            omnisharp = {
+                useModernNet = true,
+            },
+        },
+      })
+      end,
       ["gopls"] = function()
         -- Configure Go server
         lspconfig["gopls"].setup({
@@ -99,8 +111,14 @@ return {
         })
       end,
       ["jdtls"] = function()
-        -- Configure Java server
-        lspconfig["jdtls"].setup({
+         -- Configure Java server
+         lspconfig["jdtls"].setup({
+            cmd = {
+             "/Users/isaackim/.local/share/nvim/mason/bin/jdtls",
+             "-data",
+             vim.fn.stdpath("cache") .. "/jdtls/workspace",
+           },
+           root_dir = require("lspconfig.util").root_pattern('pom.xml', "gradlew", 'build.gradle', '.git'),
           capabilities = capabilities,
         })
       end,
