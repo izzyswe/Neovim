@@ -1,6 +1,7 @@
 require("isaac.core.options")
 require("isaac.core.keymaps")
 
+
 --custom command to run and create a gradle java project
 vim.api.nvim_create_user_command(
   'GradleInit',
@@ -26,3 +27,6 @@ vim.api.nvim_create_user_command(
   end,
   { nargs = 0 }
 )
+
+require("isaac.core.color") -- Load color scheme
+

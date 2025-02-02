@@ -20,19 +20,32 @@
 --   }
 -- }
 
-return {
-  -- Lazy
-  {
-    "vague2k/vague.nvim",
-    config = function()
-      require("vague").setup({
-        -- optional configuration here
-        vim.cmd.colorscheme("vague")
-      })
-    end
-  },
-}
+-- return {
+--   -- Lazy
+--   {
+--     "vague2k/vague.nvim",
+--     config = function()
+--       require("vague").setup({
+--         -- optional configuration here
+--         vim.cmd.colorscheme("vague")
+--       })
+--     end
+--   },
+-- }
 
+-- return{
+--   {
+--     "folke/tokyonight.nvim",
+--     lazy = false,
+--     priority = 1000,
+--     opts = {
+--       style = "Night",
+--     },
+--     config = function()
+--       vim.cmd[[colorscheme tokyonight]]
+--     end,
+--   },
+-- }
 -- return {
 --   {
 --     "fynnfluegge/monet.nvim",
@@ -46,10 +59,42 @@ return {
 --   }
 -- }
 
+-- return {
+--   {
+--     "tyrannicaltoucan/vim-deep-space",
+--     lazy = false,  -- Load the theme immediately
+--     priority = 1000,  -- Ensure it loads first
+--     config = function()
+--       -- Apply the colorscheme
+--       vim.cmd([[colorscheme deep-space]])
+--
+--       -- Enable true colors for better appearance
+--       vim.opt.termguicolors = true
+--
+--       -- Set transparency (optional)
+--       vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+--       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+--     end,
+--   }
+-- }
 
+-- return{
+--   {
+--     'projekt0n/github-nvim-theme',
+--     name = 'github-theme',
+--     lazy = false, -- make sure we load this during startup if it is your main colorscheme
+--     priority = 1000, -- make sure to load this before all the other start plugins
+--     config = function()
+--       require('github-theme').setup({
+--         -- ...
+--       })
+--
+--       vim.cmd('colorscheme github_dark_default')
+--     end,
+--   }
+-- }
 
-
-
+return{}
 
 
 

@@ -46,7 +46,7 @@ return {
               cmd = "cd " .. project_root .. " && gradle test"
             else
               -- Run gradle build and run from the project root
-              cmd = "cd " .. project_root .. " && gradle build && gradle run"
+              cmd = " && gradle run" .. project_root
             end
           else
             print("Could not find build.gradle")
