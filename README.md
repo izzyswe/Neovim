@@ -2,7 +2,8 @@
 
 this is my personal all-in-one setup
 
-<img width="1797" alt="Screenshot 2024-11-05 at 2 10 31 PM" src="https://github.com/user-attachments/assets/5b21c7af-ded0-464b-8953-4f2ff7a8bd93">
+<img width="1674" alt="Screenshot 2025-02-06 at 6 43 23 PM" src="https://github.com/user-attachments/assets/fb08a6b9-ec30-4547-85e1-8f3c1ea90c3e" />
+
 
 # HOW TO INSTALL AND USE MY CONFIGURATION
 
