@@ -82,6 +82,7 @@ return {
 
       -- Keybinding to run the current file
       vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>lua run_current_file()<CR>", { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>ToggleTerm<CR>",  {noremap = true, silent = true, desc = "Toggle Term"})
     end,
   }
 }

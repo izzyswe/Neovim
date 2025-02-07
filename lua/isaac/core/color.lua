@@ -38,7 +38,7 @@ end
 set_highlight("Normal", { fg = colors.foreground, bg = colors.background })
 set_highlight("Cursor", { fg = colors.cursor_text, bg = colors.cursor_color })
 set_highlight("Visual", { fg = colors.selection_fg, bg = colors.selection_bg })
-set_highlight("Comment", { fg = colors.bright_black, italic = true })
+set_highlight("Comment", { fg = "#a5a6a8", italic = true })
 set_highlight("Keyword", { fg = colors.blue, bold = true })
 set_highlight("String", { fg = colors.green })
 set_highlight("Function", { fg = colors.magenta })
