@@ -78,6 +78,63 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+-- -- Create Eclipse project structure command
+--     vim.api.nvim_create_user_command("EclipseInit", function()
+--         local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+--         local project_root = vim.fn.getcwd()
+-- -- <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
+--         local classpath = [[
+-- <?xml version="1.0" encoding="UTF-8"?>
+-- <classpath>
+--     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+-- 		  <attributes>
+-- 			  <attribute name="module" value="true"/>
+-- 		  </attributes>
+-- 	  </classpathentry>
+--     <classpathentry kind="src" path="src"/>
+--     <classpathentry kind="output" path="bin"/>
+-- </classpath>
+--         ]]
+--
+--         local project = string.format([[
+-- <?xml version="1.0" encoding="UTF-8"?>
+-- <projectDescription>
+--     <name>%s</name>
+--     <comment></comment>
+--     <projects></projects>
+--     <buildSpec>
+--         <buildCommand>
+--             <name>org.eclipse.jdt.core.javabuilder</name>
+--             <arguments></arguments>
+--         </buildCommand>
+--     </buildSpec>
+--     <natures>
+--         <nature>org.eclipse.jdt.core.javanature</nature>
+--     </natures>
+-- </projectDescription>
+--         ]], project_name)
+--
+--         -- Create folders
+--         vim.fn.mkdir(project_root .. "/src", "p")
+--         vim.fn.mkdir(project_root .. "/bin", "p")
+--
+--         -- Write .classpath file
+--         local classpath_file = io.open(project_root .. "/.classpath", "w")
+--         if classpath_file then
+--             classpath_file:write(classpath)
+--             classpath_file:close()
+--         end
+--
+--         -- Write .project file
+--         local project_file = io.open(project_root .. "/.project", "w")
+--         if project_file then
+--             project_file:write(project)
+--             project_file:close()
+--         end
+--
+--         print("Eclipse project structure initialized in " .. project_root)
+--     end, {})
+
     mason_lspconfig.setup_handlers({
       function(server_name)
         lspconfig[server_name].setup({
@@ -104,6 +161,12 @@ return {
         },
       })
       end,
+      ["rust_analyzer"] = function()
+        -- Configure Rust server
+        lspconfig["rust_analyzer"].setup({
+          capabilities = capabilities,
+        })
+      end,
       ["gopls"] = function()
         -- Configure Go server
         lspconfig["gopls"].setup({
@@ -118,8 +181,31 @@ return {
              "-data",
              vim.fn.stdpath("cache") .. "/jdtls/workspace",
            },
-           root_dir = require("lspconfig.util").root_pattern('pom.xml', "gradlew", 'build.gradle', '.git'),
+           root_dir = require("lspconfig.util").root_pattern('pom.xml', ".project", "gradlew",'build.gradle', '.git'),
           capabilities = capabilities,
+          settings = {
+            java = {
+                configuration = {
+                    updateBuildConfiguration = "automatic",
+                },
+                maven = {
+                    downloadSources = true,
+                },
+                implementationsCodeLens = {
+                    enabled = true,
+                },
+                referencesCodeLens = {
+                    enabled = true,
+                },
+                format = {
+                    enabled = true,
+                    settings = {
+                        url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                        profile = "GoogleStyle",
+                    },
+                },
+            },
+          },
         })
       end,
       ["pylsp"] = function()

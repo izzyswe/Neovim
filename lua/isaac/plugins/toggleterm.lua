@@ -10,8 +10,6 @@ local function find_project_root()
     end
     current_dir = vim.fn.fnamemodify(current_dir, ":h")  -- Go up one directory
   end
-
-  print("No build.gradle or build.gradle.kts found")  -- Debug statement
   return nil
 end
 
@@ -25,7 +23,7 @@ return {
         size = 15,
         open_mapping = [[<C-t>]],
         direction = "horizontal",
-        close_on_exit = false,
+        close_on_exit = true,
         shell = vim.o.shell,
       })
       -- Function to run the current file
@@ -39,29 +37,69 @@ return {
         if extension == "java" then
          -- For Java files, find the project root
           local project_root = find_project_root()
-          if project_root then
+           if project_root then
             -- Check if the current file is in the 'test' directory
             if file:find("/test/") then
               -- Run tests for the project
               cmd = "cd " .. project_root .. " && gradle test"
             else
               -- Run gradle build and run from the project root
-              cmd = " && gradle run" .. project_root
+              cmd = "gradle build && gradle run" --.. project_root
             end
           else
             print("Could not find build.gradle")
             return
           end
+        --  if project_root then
+        --     -- Check if the current file is in the 'test' directory
+        --     if file:find("/test/") then
+        --       -- Run tests for the project
+        --       cmd = "cd " .. project_root .. " && gradle test"
+        --     else
+        --       -- Run gradle build and run from the project root
+        --       cmd = " && gradle run" .. project_root
+        --     end
+        --  else
+        --   -- Ensure the file path is absolute
+        --   local abs_file = vim.fn.fnamemodify(file, ":p")
+        --   -- Find `src/` folder
+        --   local src_root = abs_file:match("(.*/src)/.*%.java$")
+        --   if not src_root then
+        --     print("Error: Could not find `src` folder.")
+        --     return
+        --   end
+        --   -- Extract package path (e.g., `src/com/example/Main.java` → `com/example/Main`)
+        --   local relative_path = abs_file:match(src_root .. "/(.*)%.java$")
+        --   if not relative_path then
+        --     print("Error: Could not determine package path.")
+        --     return
+        --   end
+        --   -- Convert folder structure to package notation (e.g., `com/example/Main` → `com.example.Main`)
+        --   local package_path = relative_path:gsub("/", ".")
+        --   local bin_root = src_root:gsub("/src$", "/bin")  -- Root bin directory
+        --   local bin_dir = bin_root .. "/" .. relative_path:gsub("/[^/]+$", "")  -- Package-specific directory
+        --   -- Compile and run
+        --   cmd = "mkdir -p " .. bin_dir
+        --   cmd = "javac -d " .. bin_root .. " " .. src_root .. "/**/*.java"
+        --   -- cmd = cmd .. " && javac -d " .. bin_root .. " " .. abs_file
+        --   cmd = cmd .. " && java -cp " .. bin_root .. " " .. package_path
+        -- end
         elseif extension == "py" then
           cmd = "python3 " .. file
         elseif extension == "go" then
           cmd = "go run " .. file
         elseif extension == "php" then
           cmd = "php " .. file
-        elseif extension == "cs" then
-          cmd = "dotnet build && dotnet run"
+        elseif extension == "cs" or extension == "cshtml" then
+          cmd = "dotnet build && dotnet watch run"
         elseif extension == "js" then
           cmd = "node " .. file
+        elseif extension == "jsx" then
+          cmd = "npm run dev"
+        elseif extension == "html" then
+          cmd = "live-server --port=8080"
+        elseif extension == "rs" then
+          cmd = "rustc " .. file .. " && ./" .. filename
         elseif extension == "kt" then
           -- Kotlin execution with proper working directory
           cmd = "cd " .. dir .. " && kotlinc " .. filename .. ".kt -include-runtime -d " .. filename .. ".jar && java -jar " .. filename .. ".jar"

@@ -4,7 +4,7 @@ return{
   config = function()
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
-    
+
     -- Set Header
     local logo = [[
 
@@ -33,6 +33,23 @@ return{
 
     -- Send config to alpha
     alpha.setup(dashboard.opts)
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "AlphaReady",
+      callback = function()
+        vim.opt.showtabline = 0
+      end,
+    })
+
+    -- Show bufferline again when leaving Alpha
+    vim.api.nvim_create_autocmd("BufUnload", {
+      callback = function()
+        local current_ft = vim.bo.filetype
+        if current_ft ~= "alpha" then
+          vim.opt.showtabline = 2
+        end
+      end,
+    })
 
     -- Disable folding on alpha buffer
     vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])

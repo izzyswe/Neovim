@@ -1,4 +1,5 @@
 return{
+  {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
@@ -33,4 +34,15 @@ return{
     keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = " Find string in cwd " })
     keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = " find string under cursor in cwd" })
   end,
+  },
+  {
+    "dimaportenko/telescope-simulators.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("simulators").setup({
+        android_emulator = true,
+        apple_simulator = false,
+      })
+    end,
+  },
 }
