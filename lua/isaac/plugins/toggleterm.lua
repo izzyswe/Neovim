@@ -7,6 +7,8 @@ local function find_project_root()
     if vim.fn.filereadable(current_dir .. "/build.gradle") == 1 or vim.fn.filereadable(current_dir .. "/build.gradle.kts") == 1 then
       --print("Found build.gradle or build.gradle.kts in: " .. current_dir)  -- Debug statement
       return current_dir  -- Return the project root
+    elseif vim.fn.filereadable(current_dir .. "/pom.xml") == 1 then
+      return current_dir
     end
     current_dir = vim.fn.fnamemodify(current_dir, ":h")  -- Go up one directory
   end
@@ -45,6 +47,12 @@ return {
             else
               -- Run gradle build and run from the project root
               cmd = "gradle build && gradle run" --.. project_root
+            end
+
+            if file:find("/test/") then
+              cmd = "cd" .. project_root .. " && mvn test"
+            else
+              cmd = "mvn compile exec:java"
             end
           else
             print("Could not find build.gradle")
@@ -94,8 +102,8 @@ return {
           cmd = "dotnet build && dotnet watch run"
         elseif extension == "js" then
           cmd = "node " .. file
-        elseif extension == "jsx" then
-          cmd = "npm run dev"
+        elseif extension == "jsx" or extension ==  "vue" then
+          cmd = "npm run dev" --specifically for React Vite
         elseif extension == "html" then
           cmd = "live-server --port=8080"
         elseif extension == "rs" then

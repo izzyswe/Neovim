@@ -12,6 +12,15 @@ vim.api.nvim_create_user_command(
 )
 
 vim.api.nvim_create_user_command(
+  'MavenInit',
+  function(opts)
+    local project_name = opts.args
+    vim.cmd('!mvn archetype:generate -DgroupId=com.'.. project_name.. ' -DartifactId=' .. project_name ..' -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false')
+  end,
+  { nargs = 1 }
+)
+
+vim.api.nvim_create_user_command(
   'DotNetInit',
   function(opts)
     local project_name = opts.args

@@ -177,7 +177,7 @@ return {
          -- Configure Java server
          lspconfig["jdtls"].setup({
             cmd = {
-             "/Users/isaackim/.local/share/nvim/mason/bin/jdtls",
+             "/Users/xyz.isx/.local/share/nvim/mason/bin/jdtls",
              "-data",
              vim.fn.stdpath("cache") .. "/jdtls/workspace",
            },
