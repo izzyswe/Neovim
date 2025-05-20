@@ -8,15 +8,9 @@ return {
     "williamboman/mason.nvim",
   },
   config = function()
-    -- import lspconfig plugin
-    local lspconfig = require("lspconfig")
-
-    -- import mason_lspconfig plugin
-    local mason_lspconfig = require("mason-lspconfig")
-
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
+    
     local keymap = vim.keymap -- for conciseness
 
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -78,113 +72,32 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
--- -- Create Eclipse project structure command
---     vim.api.nvim_create_user_command("EclipseInit", function()
---         local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
---         local project_root = vim.fn.getcwd()
--- -- <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
---         local classpath = [[
--- <?xml version="1.0" encoding="UTF-8"?>
--- <classpath>
---     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
--- 		  <attributes>
--- 			  <attribute name="module" value="true"/>
--- 		  </attributes>
--- 	  </classpathentry>
---     <classpathentry kind="src" path="src"/>
---     <classpathentry kind="output" path="bin"/>
--- </classpath>
---         ]]
---
---         local project = string.format([[
--- <?xml version="1.0" encoding="UTF-8"?>
--- <projectDescription>
---     <name>%s</name>
---     <comment></comment>
---     <projects></projects>
---     <buildSpec>
---         <buildCommand>
---             <name>org.eclipse.jdt.core.javabuilder</name>
---             <arguments></arguments>
---         </buildCommand>
---     </buildSpec>
---     <natures>
---         <nature>org.eclipse.jdt.core.javanature</nature>
---     </natures>
--- </projectDescription>
---         ]], project_name)
---
---         -- Create folders
---         vim.fn.mkdir(project_root .. "/src", "p")
---         vim.fn.mkdir(project_root .. "/bin", "p")
---
---         -- Write .classpath file
---         local classpath_file = io.open(project_root .. "/.classpath", "w")
---         if classpath_file then
---             classpath_file:write(classpath)
---             classpath_file:close()
---         end
---
---         -- Write .project file
---         local project_file = io.open(project_root .. "/.project", "w")
---         if project_file then
---             project_file:write(project)
---             project_file:close()
---         end
---
---         print("Eclipse project structure initialized in " .. project_root)
---     end, {})
+    vim.lsp.config('phpactor', {
+      capabilities = capabilities,
+    })
 
-    mason_lspconfig.setup_handlers({
-      function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
+    vim.lsp.config('omnisharp', {
+      capabilities = capabilities,
+    })
 
-      -- Language server configurations
-      ["phpactor"] = function()
-        -- Configure PHP server
-        lspconfig["phpactor"].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["omnisharp"] = function()
-        lspconfig["omnisharp"].setup({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
-        capabilities = capabilities,
-        root_dir = require("lspconfig.util").root_pattern(".csproj", ".sln", ".git")(vim.fn.getcwd()),
-        settings = {
-            omnisharp = {
-                useModernNet = true,
-            },
-        },
-      })
-      end,
-      ["rust_analyzer"] = function()
-        -- Configure Rust server
-        lspconfig["rust_analyzer"].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["gopls"] = function()
-        -- Configure Go server
-        lspconfig["gopls"].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["jdtls"] = function()
-         -- Configure Java server
-         lspconfig["jdtls"].setup({
-            cmd = {
-             "/Users/xyz.isx/.local/share/nvim/mason/bin/jdtls",
-             "-data",
-             vim.fn.stdpath("cache") .. "/jdtls/workspace",
-           },
-           root_dir = require("lspconfig.util").root_pattern('pom.xml', ".project", "gradlew",'build.gradle', '.git'),
-          capabilities = capabilities,
+    vim.lsp.config('rust_analyzer', {
+      capabilities = capabilities,
+    })
+
+    vim.lsp.config('gopls', {
+      capabilities = capabilities,
+    })
+
+    vim.lsp.config('jdtls', {
+      capabilities = capabilities,
+          cmd = {
+            "/Users/xyz.isx/.local/share/nvim/mason/bin/jdtls",
+            "-data",
+            vim.fn.stdpath("cache") .. "/jdtls/workspace",
+          },
+          root_dir = require("lspconfig.util").root_pattern('pom.xml', ".project", "gradlew",'build.gradle', '.git'),
           settings = {
-            java = {
+          java = {
                 configuration = {
                     updateBuildConfiguration = "automatic",
                 },
@@ -206,96 +119,97 @@ return {
                 },
             },
           },
-        })
-      end,
-      ["pylsp"] = function()
-        -- Configure Python server
-        lspconfig["pylsp"].setup({
-        capabilities = capabilities,
-          settings = {
-            pylsp = {
-              plugins = {
-                pycodestyle = { maxLineLength = 150 }
-              }
-            }
-          }
-      })
-      end,
-      ["pyright"] = function()
-        -- Configure Python server
-        lspconfig["pyright"].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["html"] = function()
-        -- Configure HTML server
-        lspconfig["html"].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["cssls"] = function()
-        -- Configure CSS server
-        lspconfig["cssls"].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["kotlin_language_server"] = function()
-        -- Configure Kotlin server
-        lspconfig["kotlin_language_server"].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["templ"] = function()
-        -- Configure Templ server
-        lspconfig["templ"].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["svelte"] = function()
-        -- Configure svelte server
-        lspconfig["svelte"].setup({
-          capabilities = capabilities,
-          on_attach = function(client, bufnr)
-            vim.api.nvim_create_autocmd("BufWritePost", {
-              pattern = { "*.js", "*.ts" },
-              callback = function(ctx)
-                client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-              end,
-            })
-          end,
-        })
-      end,
-      ["graphql"] = function()
-        -- Configure graphql language server
-        lspconfig["graphql"].setup({
-          capabilities = capabilities,
-          filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-        })
-      end,
-      ["emmet_ls"] = function()
-        -- configure emmet language server
-        lspconfig["emmet_ls"].setup({
-          capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-        })
-      end,
-      ["lua_ls"] = function()
-        -- configure lua server (with special settings)
-        lspconfig["lua_ls"].setup({
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" },
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        })
-      end,
     })
-  end,
-}
 
+    vim.lsp.config('pylsp', {
+      capabilities = capabilities,
+      -- Configure Python server
+      settings = {
+        pylsp = {
+          plugins = {
+            pycodestyle = { maxLineLength = 150 }
+          }
+        }
+      }
+    })
+
+    vim.lsp.config('pyright', {
+      capabilities = capabilities,
+    })
+
+    vim.lsp.config('html', {
+      capabilities = capabilities,
+    })
+
+    vim.lsp.config('cssls', {
+      capabilities = capabilities,
+    })
+
+    vim.lsp.config('graphql', {
+      capabilities = capabilities,
+      filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+    })
+
+    vim.lsp.config('kotlin_language_server', {
+      capabilities = capabilities,
+    })
+
+    vim.lsp.config('templ', {
+      capabilities = capabilities,
+    })
+
+    vim.lsp.config('svelte', {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePost", {
+          pattern = { "*.js", "*.ts" },
+            callback = function(ctx)
+              client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+            end,
+      })
+      end
+    })
+
+    vim.lsp.config('graphql', {
+      capabilities = capabilities,
+      filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+    })
+
+    vim.lsp.config('emmet_ls', {
+      capabilities = capabilities,
+      filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+    })
+
+    vim.lsp.config('lua_ls', {
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+            disable = { 'missing-fields' },
+          },
+          completion = {
+            callSnippet = "Replace",
+          },
+        },
+      },
+    })
+  vim.lsp.enable({
+      'phpactor',
+      'omnisharp',
+      'rust_analyzer',
+      'gopls',
+      'jdtls',
+      'pylsp',
+      'pyright',
+      'html',
+      'cssls',
+      'kotlin_language_server',
+      'templ',
+      'svelte',
+      'graphql',
+      'emmet_ls',
+      'lua_ls'
+  })
+end,
+}
