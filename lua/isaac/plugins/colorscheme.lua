@@ -33,6 +33,33 @@
 --   },
 -- }
 
+return {
+  {
+    "astronvim/astrotheme",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("astrotheme").setup({
+        palette = "astromars", -- String of the default palette to use when calling `:colorscheme astrotheme`
+        style = {
+          transparent = false,
+          inactive = true,
+          float = true,
+          neotree = true,
+          border = true,
+          title_invert = true,
+          italic_comments = true,
+          simple_syntax_colors = true,
+        },
+        termguicolors = true,
+        terminal_color = true,
+        plugin_default = "auto",
+      })
+      vim.cmd("colorscheme astromars")
+    end
+  }
+}
+
 -- return{
 --   {
 --     "folke/tokyonight.nvim",
@@ -89,29 +116,29 @@
 --         -- ...
 --       })
 --
---       vim.cmd('colorscheme github_dark_default')
+--       vim.cmd('colorscheme github_dark_dimmed')
 --     end,
 --   }
 -- }
 
---Catppuccin
-return{
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
-    config = function()
-      require("catppuccin").setup({
-        background = {
-          dark = "frappe"
-        }
-      })
-      vim.cmd('colorscheme catppuccin')
-    end,
-  }
-}
+-- Catppuccin
+-- return{
+--   {
+--     'catppuccin/nvim',
+--     name = 'catppuccin',
+--     priority = 1000,
+--     config = function()
+--       require("catppuccin").setup({
+--         background = {
+--           dark = "Frappe"
+--         }
+--       })
+--       vim.cmd('colorscheme catppuccin')
+--     end,
+--   }
+-- }
 
 
 --for null value use "return {}"
-
+-- return{}
 

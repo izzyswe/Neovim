@@ -37,5 +37,5 @@ vim.api.nvim_create_user_command(
   { nargs = 0 }
 )
 
---require("isaac.core.color") -- Load color scheme
+-- require("isaac.core.color") -- Load color scheme
 

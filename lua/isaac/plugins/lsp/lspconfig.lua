@@ -49,10 +49,14 @@ return {
         keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
         opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+        keymap.set("n", "[d",function()
+          vim.diagnostic.jump({ count = -1, float = true })
+        end, opts)
 
         opts.desc = "Go to next diagnostic"
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        keymap.set("n", "]d",function()
+          vim.diagnostic.jump({ count = 1, float = true })
+        end, opts)
 
         opts.desc = "Show documentation for what is under cursor"
         keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -66,11 +70,27 @@ return {
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     -- Change the Diagnostic symbols in the sign column (gutter)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN]  = " ",
+          [vim.diagnostic.severity.HINT]  = "󰠠 ",
+          [vim.diagnostic.severity.INFO]  = " ",
+        },
+      },
+    })
+
+    vim.o.updatetime = 300
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = function()
+        local float_opts = {
+          focusable = false,
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost", "ModeChanged" },
+        }
+        vim.diagnostic.open_float(nil, float_opts)
+      end,
+    })
 
     vim.lsp.config('phpactor', {
       capabilities = capabilities,
@@ -137,12 +157,39 @@ return {
       capabilities = capabilities,
     })
 
+    vim.lsp.config('clangd',{
+      capabilities = capabilities,
+      filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+      cmd = { "clangd" },
+      root_markers = {
+        '.clangd',
+        '.clang-tidy',
+        '.clang-format',
+        'compile_commands.json',
+        'compile_flags.txt',
+        'configure.ac', -- AutoTools
+        '.git',
+      },
+      offsetEncoding = { "utf-8", "utf-16" },
+      textDocument = {
+        completion = {
+          editsNearCursor = true,
+
+        },
+      },
+    })
+
     vim.lsp.config('html', {
       capabilities = capabilities,
     })
 
     vim.lsp.config('cssls', {
       capabilities = capabilities,
+    })
+
+    vim.lsp.config('eslint', {
+      capabilities = capabilities,
+      filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue" }
     })
 
     vim.lsp.config('graphql', {
