@@ -108,37 +108,32 @@ return {
       capabilities = capabilities,
     })
 
-    vim.lsp.config('jdtls', {
+   vim.lsp.config('jdtls', {
       capabilities = capabilities,
-          cmd = {
-            "/Users/xyz.isx/.local/share/nvim/mason/bin/jdtls",
-            "-data",
-            vim.fn.stdpath("cache") .. "/jdtls/workspace",
+      settings = {
+        java = {
+          root_markers = { '.project', 'pom.xml', 'build.gradle', 'build.gradle.kts', '.git' },
+          configuration = {
+            updateBuildConfiguration = "automatic",
           },
-          root_dir = require("lspconfig.util").root_pattern('pom.xml', ".project", "gradlew",'build.gradle', '.git'),
-          settings = {
-          java = {
-                configuration = {
-                    updateBuildConfiguration = "automatic",
-                },
-                maven = {
-                    downloadSources = true,
-                },
-                implementationsCodeLens = {
-                    enabled = true,
-                },
-                referencesCodeLens = {
-                    enabled = true,
-                },
-                format = {
-                    enabled = true,
-                    settings = {
-                        url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-                        profile = "GoogleStyle",
-                    },
-                },
+          maven = {
+            downloadSources = true,
+          },
+          implementationsCodeLens = {
+            enabled = true,
+          },
+          referencesCodeLens = {
+            enabled = true,
+          },
+          format = {
+            enabled = true,
+            settings = {
+              url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+              profile = "GoogleStyle",
             },
           },
+        },
+      },
     })
 
     vim.lsp.config('pylsp', {
