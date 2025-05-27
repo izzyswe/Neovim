@@ -45,18 +45,18 @@ return {
           transparent = false,
           inactive = true,
           float = true,
-          neotree = true,
+          nvimtree = true,
           border = true,
           title_invert = true,
           italic_comments = true,
           simple_syntax_colors = true,
         },
-        termguicolors = true,
+        -- termguicolors = true,
         terminal_color = true,
-        plugin_default = "auto",
+        plugin_default = "true",
       })
       vim.cmd("colorscheme astromars")
-    end
+      end
   }
 }
 
@@ -73,6 +73,7 @@ return {
 --     end,
 --   },
 -- }
+
 -- return {
 --   {
 --     "fynnfluegge/monet.nvim",
@@ -130,14 +131,13 @@ return {
 --     config = function()
 --       require("catppuccin").setup({
 --         background = {
---           dark = "Frappe"
+--           dark = "frappe", -- options: macchiato, mocha, latte, frappe
 --         }
 --       })
 --       vim.cmd('colorscheme catppuccin')
 --     end,
 --   }
 -- }
-
 
 --for null value use "return {}"
 -- return{}
