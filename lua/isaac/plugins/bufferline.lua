@@ -5,7 +5,7 @@ return {
   version = "*",
   opts = {
     options = {
-      mode = "buffers",
+      mode = "tabs", -- modes: "buffers", "tabs", "both"
       offsets = {
         {
           filetype = "NvimTree",
