@@ -20,6 +20,7 @@ return{
 
       ]]
     dashboard.section.header.val = vim.split(logo, '\n')
+
     -- Set menu
     dashboard.section.buttons.val = {
       dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
