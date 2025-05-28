@@ -25,8 +25,11 @@ return {
         size = 15,
         open_mapping = [[<C-t>]],
         direction = "horizontal",
-        close_on_exit = true,
+        close_on_exit = false,
         shell = vim.o.shell,
+        autochdir = true,
+        persist_mode = false,
+        update_cwd = true,
       })
       -- Function to run the current file
       function _G.run_current_file()
@@ -121,7 +124,7 @@ return {
           cmd = cmd,
           hidden = true,
           direction = "horizontal",
-          close_on_exit = false,
+          close_on_exit = true,
         })
         run_term:toggle()
       end
