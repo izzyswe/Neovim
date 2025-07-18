@@ -92,10 +92,6 @@ return {
       end,
     })
 
-    vim.lsp.config('phpactor', {
-      capabilities = capabilities,
-    })
-
     vim.lsp.config('omnisharp', {
       capabilities = capabilities,
     })

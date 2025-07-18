@@ -13,6 +13,7 @@ return {
       red = "#FF4A4A",
       fg = "#c3ccdc",
       bg = "#1b2024",
+      xcode_bg ="#1F1F24",
       inactive_bg = "#2c3043",
     }
 
@@ -77,30 +78,31 @@ local bubbleColors = {
   red    = '#ff5189',
   violet = '#d183e8',
   grey   = '#303030',
+  xcode_bg = "#1F1F24",
   inactive_bg = '#2c3043',
 }
 
 local bubbles_theme = {
   normal = {
     a = { fg = bubbleColors.black, bg = bubbleColors.blue },
-    b = { fg = bubbleColors.white, bg = bubbleColors.grey },
-    c = { fg = bubbleColors.white },
+    b = { fg = bubbleColors.white, bg = bubbleColors.xcode_bg },
+    -- c = { fg = bubbleColors.white },
   },
 
   insert = { a = { fg = bubbleColors.black, bg = bubbleColors.cyan } },
   visual = { a = { fg = bubbleColors.black, bg = bubbleColors.violet } },
   replace = { a = { fg = bubbleColors.black, bg = bubbleColors.red } },
 
-  -- command = {
-  --   a = { bg = colors.yellow, fg = colors.bg, gui = "bold" },
-  --   b = { bg = colors.bg, fg = colors.fg },
-  --   c = { bg = colors.bg, fg = colors.fg },
-  -- },
+  command = {
+    a = { bg = colors.yellow, fg = colors.xcode_bg },
+    -- b = { bg = colors.bg, fg = colors.fg },
+    -- c = { bg = colors.bg, fg = colors.fg },
+  },
 
 
   inactive = {
-    a = { fg = bubbleColors.white, bg = bubbleColors.inactive_bg },
-    b = { fg = bubbleColors.white, bg = bubbleColors.inactive_bg },
+    a = { fg = bubbleColors.white },-- bg = bubbleColors.inactive_bg },
+    b = { fg = bubbleColors.white },-- bg = bubbleColors.inactive_bg },
     c = { fg = bubbleColors.white },
   },
 }
@@ -109,7 +111,8 @@ require('lualine').setup {
   options = {
     theme = bubbles_theme,
     component_separators = '',
-    section_separators = { left = '' , right = '' },
+    -- section_separators = { left = '' , right = '' },
+    section_separators = { left = ' ' , right = ' ' },
   },
   sections = {
     -- lualine_a = { { 'mode', separator = { left = '' }, right_padding = 0 } },

@@ -36,9 +36,6 @@ return {
       row = 0,
       col = 1
     },
-    yadm = {
-      enable = false
-    },
   },
   config = function(_, opts)
     require("gitsigns").setup(opts)
