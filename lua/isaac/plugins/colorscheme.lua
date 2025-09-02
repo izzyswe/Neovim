@@ -8,29 +8,65 @@
 --   },
 -- }
 
--- return {
+-- another onedark to try is "https://github.com/monsonjeremy/onedark.nvim"
+-- return{
+--   -- Using Lazy
 --   {
---     "dgox16/oldworld.nvim",
---     lazy = false,  -- Load the theme immediately
---     priority = 1000,  -- Ensure it loads first
+--     "navarasu/onedark.nvim",
+--     priority = 1000, -- make sure to load this before all the other start plugins
 --     config = function()
---       -- Apply the OldWorld theme
---       vim.cmd.colorscheme("oldworld")
---     end,
+--       require('onedark').setup {
+--         style = 'warm'
+--       }
+--       -- Enable theme
+--       require('onedark').load()
+--     end
+--   }
+-- }
+
+-- return{
+--   {
+--     "sainnhe/gruvbox-material",
+--     lazy = false, -- load immediately
+--     priority = 1000, -- make sure it loads before other plugins
+--     config = function()
+--       vim.g.gruvbox_material_background = "soft" -- options: 'soft', 'medium', 'hard'
+--       vim.g.gruvbox_material_palette = "material" -- options: 'material', 'mix', 'original'
+--       vim.g.gruvbox_material_enable_italic = 1
+--       vim.g.gruvbox_material_transparent_background = 0
+--       vim.o.background = "dark"
+--       vim.cmd.colorscheme("gruvbox-material")
+--     end
 --   }
 -- }
 
 -- return {
---   -- Lazy
+--   "lewpoly/sherbet.nvim",
+--   config = function()
+--     vim.cmd("colorscheme sherbet")
+--   end
+-- }
+
+-- return{
 --   {
---     "vague2k/vague.nvim",
---     config = function()
---       require("vague").setup({
---         -- optional configuration here
---         vim.cmd.colorscheme("vague")
+--     'datsfilipe/vesper.nvim',
+--     priority = 100,
+--     config = function ()
+--       vim.cmd.colorscheme("vesper")
+--       require('vesper').setup({
+--         transparent = false, -- Boolean: Sets the background to transparent
+--         italics = {
+--           comments = true, -- Boolean: Italicizes comments
+--           keywords = true, -- Boolean: Italicizes keywords
+--           functions = false, -- Boolean: Italicizes functions
+--           strings = true, -- Boolean: Italicizes strings
+--           variables = false, -- Boolean: Italicizes variables
+--         },
+--         overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
+--         palette_overrides = {},
 --       })
 --     end
---   },
+--   }
 -- }
 
 -- return {
@@ -67,7 +103,7 @@
 --       end
 --   }
 -- }
-
+--
 -- return{
 --   {
 --     "folke/tokyonight.nvim",
@@ -82,24 +118,6 @@
 --   },
 -- }
 
--- return {
---   {
---     "tyrannicaltoucan/vim-deep-space",
---     lazy = false,  -- Load the theme immediately
---     priority = 1000,  -- Ensure it loads first
---     config = function()
---       -- Apply the colorscheme
---       vim.cmd([[colorscheme deep-space]])
---
---       -- Enable true colors for better appearance
---       vim.opt.termguicolors = true
---
---       -- Set transparency (optional)
---       vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
---       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
---     end,
---   }
--- }
 
 -- return{
 --   {
@@ -109,28 +127,75 @@
 --     priority = 1000, -- make sure to load this before all the other start plugins
 --     config = function()
 --       require('github-theme').setup({
---         -- ...
---       })
+--       specs = {
+--         github_dark_default = {
+--           syntax = {
+--             operator = "#c792ea",
+--           },
+--           git = {
+--             changed = "#ffcb6b",
+--           },
+--           bg1 = "#171B22", -- actual background
+--         },
+--       },
+--       groups = {
+--         github_dark = {
+--           Normal = { bg = "#171B22" },
+--           NormalNC = { bg = "#171B22" },
+--           NormalFloat = { bg = "#171B22" },
+--           FloatBorder = { bg = "#171B22" },
+--           SignColumn = { bg = "#171B22" },
+--         },
+--       },
+--     })
 --
---       vim.cmd('colorscheme github_dark_dimmed')
+--       -- vim.api.nvim_set_hl(0, "@variable.javascript", { fg = "#6FB4EE" }) -- Change color to yellowish
+--       vim.api.nvim_set_hl(0, "@operator.javascript", { fg = "#C35E58" }) -- Or any hex color
+--       vim.cmd('colorscheme github_dark_default')
+--       require("github-theme").compile()
 --     end,
 --   }
 -- }
 
--- Xcode
-return{
-  {
-    "lunacookies/vim-colors-xcode",
-    name = "xcode",  -- optional, useful if you want to refer by name
-    lazy = false,    -- load immediately (change to true if you want it lazy-loaded)
-    priority = 1000, -- make sure it loads before other UI plugins
-    config = function()
-      vim.cmd.colorscheme("xcodedarkhc") -- or "xcodelight"
-    end,
-  }
-}
+-- -- Xcode
+-- return{
+--   {
+--     "lunacookies/vim-colors-xcode",
+--     name = "xcode",  -- optional, useful if you want to refer by name
+--     lazy = false,    -- load immediately (change to true if you want it lazy-loaded)
+--     priority = 1000, -- make sure it loads before other UI plugins
+--     config = function()
+--       vim.cmd.colorscheme("xcodedarkhc") -- or "xcodelight"
+--     end,
+--   }
+-- }
 
--- Catppuccin
+-- return{
+--   { 
+--     url = 'https://gitlab.com/sxwpb/halfspace.nvim',
+--     config = function()
+--       vim.cmd.colorscheme('halfspace')
+--     end,
+--   },
+-- }
+
+-- return{
+--   {
+--     "Mofiqul/adwaita.nvim",
+--     lazy = false,
+--     priority = 1000,
+--
+--     -- configure and set on startup
+--     config = function()
+--         -- vim.g.adwaita_darker = true             -- for darker version
+--         vim.g.adwaita_disable_cursorline = true -- to disable cursorline
+--         -- vim.g.adwaita_transparent = true        -- makes the background transparent
+--         vim.cmd('colorscheme adwaita')
+--     end
+--   }
+-- }
+
+-- -- Catppuccin
 -- return{
 --   {
 --     'catppuccin/nvim',
@@ -150,23 +215,62 @@ return{
 --   }
 -- }
 
---ZENBONES
--- return{
---   {
---     "zenbones-theme/zenbones.nvim",
---     -- Optionally install Lush. Allows for more configuration or extending the colorscheme
---     -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
---     -- In Vim, compat mode is turned on as Lush only works in Neovim.
---     dependencies = "rktjmp/lush.nvim",
---     lazy = false,
---     priority = 1000,
---     -- you can set set configuration options here
---     config = function()
---         vim.g.zenbones_darken_comments = 45
---         vim.cmd.colorscheme('zenbones')
---     end
---   }
--- }
-
 --for null value use "return {}"
 -- return{}
+
+
+return {
+  -- Gruvbox-material theme: This will be your default theme.
+  {
+    "sainnhe/gruvbox-material",
+    lazy = false, -- Load this immediately
+    priority = 1000, -- Make sure it loads before other plugins
+    config = function()
+      -- Settings for the gruvbox-material theme
+      vim.g.gruvbox_material_background = "soft"
+      vim.g.gruvbox_material_palette = "material"
+      vim.g.gruvbox_material_enable_italic = 1
+      vim.g.gruvbox_material_transparent_background = 0
+      vim.o.background = "dark"
+      
+      -- Set gruvbox-material as the initial colorscheme.
+      vim.cmd.colorscheme("gruvbox-material")
+    end,
+  },
+
+  -- Github-nvim-theme: This will be your theme for JavaScript and TypeScript.
+  {
+    "projekt0n/github-nvim-theme",
+    name = "github-theme",
+    lazy = false, -- Make sure this is also loaded during startup
+    config = function()
+      -- Setup function for the github-theme plugin
+      require("github-theme").setup({
+        specs = {
+          github_dark_default = {
+            syntax = {
+              operator = "#c792ea",
+            },
+            git = {
+              changed = "#ffcb6b",
+            },
+            bg1 = "#171B22", -- The actual background color
+          },
+        },
+        groups = {
+          github_dark = {
+            Normal = { bg = "#171B22" },
+            NormalNC = { bg = "#171B22" },
+            NormalFloat = { bg = "#171B22" },
+            FloatBorder = { bg = "#171B22" },
+            SignColumn = { bg = "#171B22" },
+          },
+        },
+      })
+      
+      -- Compile the theme settings.
+      require("github-theme").compile()
+    end,
+  },
+}
+

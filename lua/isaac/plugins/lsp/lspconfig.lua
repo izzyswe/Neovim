@@ -174,8 +174,34 @@ return {
       capabilities = capabilities,
     })
 
+    vim.lsp.config('somesass_ls', {
+      capabilities = capabilities,
+      filetypes = { 'scss', 'sass'},
+      root_markers = { ".git", ".package.json" },
+      settings = {
+        somesass = {
+          suggestAllFromOpenDocument = true
+        }
+      }
+    })
+
     vim.lsp.config('cssls', {
       capabilities = capabilities,
+      filetypes = { "css", "scss", "less" },
+      init_options = {
+        provideFormatter = true
+      },
+      settings = {
+        css = {
+          validate = true
+        },
+        less = {
+          validate = true
+        },
+        scss = {
+          validate = true
+        }
+      }
     })
 
     vim.lsp.config('eslint', {
@@ -241,6 +267,7 @@ return {
       'pylsp',
       'pyright',
       'html',
+      'somesass_ls',
       'cssls',
       'kotlin_language_server',
       'templ',

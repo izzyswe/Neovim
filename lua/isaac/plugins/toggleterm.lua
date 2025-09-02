@@ -98,7 +98,7 @@ return {
         --   cmd = cmd .. " && java -cp " .. bin_root .. " " .. package_path
         -- end
         elseif extension == "py" then
-          cmd = "python3 " .. file
+          cmd = "source venv/bin/activate && python3 " .. file
         elseif extension == "go" then
           cmd = "go run " .. file
         elseif extension == "php" then

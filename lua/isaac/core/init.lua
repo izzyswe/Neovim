@@ -1,6 +1,29 @@
 require("isaac.core.options")
 require("isaac.core.keymaps")
 
+-- NOTE: The plugins themselves (like gruvbox-material and github-theme)
+-- must be loaded before these autocommands will work.
+
+-- Create a named autocmd group to manage our theme-switching logic.
+local theme_group = vim.api.nvim_create_augroup("ThemeByFileType", { clear = true })
+
+-- Autocommand to switch to the github-dark-default theme for JavaScript and TypeScript files.
+vim.api.nvim_create_autocmd("FileType", {
+  group = theme_group,
+  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  callback = function()
+    vim.cmd.colorscheme("github_dark_default")
+  end,
+})
+
+-- Autocommand to switch back to the gruvbox-material theme for other file types.
+vim.api.nvim_create_autocmd("FileType", {
+  group = theme_group,
+  pattern = { "python", "go", "rust", "lua" },
+  callback = function()
+    vim.cmd.colorscheme("gruvbox-material")
+  end,
+})
 
 --custom command to run and create a gradle java project
 vim.api.nvim_create_user_command(

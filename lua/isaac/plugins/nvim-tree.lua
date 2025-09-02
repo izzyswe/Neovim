@@ -16,7 +16,7 @@ return {
         update_root = true,
       },
       view = {
-        width = 34,
+        width = 30,
         relativenumber = false,
       },
       -- change folder arrow icons
