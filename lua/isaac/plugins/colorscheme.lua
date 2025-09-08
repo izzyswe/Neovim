@@ -24,21 +24,21 @@
 --   }
 -- }
 
--- return{
---   {
---     "sainnhe/gruvbox-material",
---     lazy = false, -- load immediately
---     priority = 1000, -- make sure it loads before other plugins
---     config = function()
---       vim.g.gruvbox_material_background = "soft" -- options: 'soft', 'medium', 'hard'
---       vim.g.gruvbox_material_palette = "material" -- options: 'material', 'mix', 'original'
---       vim.g.gruvbox_material_enable_italic = 1
---       vim.g.gruvbox_material_transparent_background = 0
---       vim.o.background = "dark"
---       vim.cmd.colorscheme("gruvbox-material")
---     end
---   }
--- }
+return{
+  {
+    "sainnhe/gruvbox-material",
+    lazy = false, -- load immediately
+    priority = 1000, -- make sure it loads before other plugins
+    config = function()
+      vim.g.gruvbox_material_background = "soft" -- options: 'soft', 'medium', 'hard'
+      vim.g.gruvbox_material_palette = "material" -- options: 'material', 'mix', 'original'
+      vim.g.gruvbox_material_enable_italic = 1
+      vim.g.gruvbox_material_transparent_background = 0
+      vim.o.background = "dark"
+      vim.cmd.colorscheme("gruvbox-material")
+    end
+  }
+}
 
 -- return {
 --   "lewpoly/sherbet.nvim",
@@ -219,58 +219,58 @@
 -- return{}
 
 
-return {
-  -- Gruvbox-material theme: This will be your default theme.
-  {
-    "sainnhe/gruvbox-material",
-    lazy = false, -- Load this immediately
-    priority = 1000, -- Make sure it loads before other plugins
-    config = function()
-      -- Settings for the gruvbox-material theme
-      vim.g.gruvbox_material_background = "soft"
-      vim.g.gruvbox_material_palette = "material"
-      vim.g.gruvbox_material_enable_italic = 1
-      vim.g.gruvbox_material_transparent_background = 0
-      vim.o.background = "dark"
-      
-      -- Set gruvbox-material as the initial colorscheme.
-      vim.cmd.colorscheme("gruvbox-material")
-    end,
-  },
-
-  -- Github-nvim-theme: This will be your theme for JavaScript and TypeScript.
-  {
-    "projekt0n/github-nvim-theme",
-    name = "github-theme",
-    lazy = false, -- Make sure this is also loaded during startup
-    config = function()
-      -- Setup function for the github-theme plugin
-      require("github-theme").setup({
-        specs = {
-          github_dark_default = {
-            syntax = {
-              operator = "#c792ea",
-            },
-            git = {
-              changed = "#ffcb6b",
-            },
-            bg1 = "#171B22", -- The actual background color
-          },
-        },
-        groups = {
-          github_dark = {
-            Normal = { bg = "#171B22" },
-            NormalNC = { bg = "#171B22" },
-            NormalFloat = { bg = "#171B22" },
-            FloatBorder = { bg = "#171B22" },
-            SignColumn = { bg = "#171B22" },
-          },
-        },
-      })
-      
-      -- Compile the theme settings.
-      require("github-theme").compile()
-    end,
-  },
-}
+-- return {
+--   -- Gruvbox-material theme: This will be your default theme.
+--   {
+--     "sainnhe/gruvbox-material",
+--     lazy = false, -- Load this immediately
+--     priority = 1000, -- Make sure it loads before other plugins
+--     config = function()
+--       -- Settings for the gruvbox-material theme
+--       vim.g.gruvbox_material_background = "soft"
+--       vim.g.gruvbox_material_palette = "material"
+--       vim.g.gruvbox_material_enable_italic = 1
+--       vim.g.gruvbox_material_transparent_background = 0
+--       vim.o.background = "dark"
+--
+--       -- Set gruvbox-material as the initial colorscheme.
+--       vim.cmd.colorscheme("gruvbox-material")
+--     end,
+--   },
+--
+--   -- Github-nvim-theme: This will be your theme for JavaScript and TypeScript.
+--   {
+--     "projekt0n/github-nvim-theme",
+--     name = "github-theme",
+--     lazy = false, -- Make sure this is also loaded during startup
+--     config = function()
+--       -- Setup function for the github-theme plugin
+--       require("github-theme").setup({
+--         specs = {
+--           github_dark_default = {
+--             syntax = {
+--               operator = "#c792ea",
+--             },
+--             git = {
+--               changed = "#ffcb6b",
+--             },
+--             bg1 = "#171B22", -- The actual background color
+--           },
+--         },
+--         groups = {
+--           github_dark = {
+--             Normal = { bg = "#171B22" },
+--             NormalNC = { bg = "#171B22" },
+--             NormalFloat = { bg = "#171B22" },
+--             FloatBorder = { bg = "#171B22" },
+--             SignColumn = { bg = "#171B22" },
+--           },
+--         },
+--       })
+--
+--       -- Compile the theme settings.
+--       require("github-theme").compile()
+--     end,
+--   },
+-- }
 

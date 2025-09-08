@@ -123,7 +123,7 @@ return {
           cmd = "rustc " .. file .. " && ./" .. filename
         elseif extension == "kt" then
           -- Kotlin execution with proper working directory
-          cmd = "cd " .. dir .. " && kotlinc " .. filename .. ".kt -include-runtime -d " .. filename .. ".jar && java -jar " .. filename .. ".jar"
+          cmd = "cd " .. dir .. " && kotlinc " .. filename .. ".kt -include-runtime -d " .. filename .. ".jar && java -jar " .. filename .. ".jar --enable-native-access=ALL-UNNAMED"
         else
           print("Unsupported file type: " .. extension)
           return

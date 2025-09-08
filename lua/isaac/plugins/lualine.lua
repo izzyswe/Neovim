@@ -1,7 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  config = function() 
+  config = function()
     local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
     local bubbleColors = {
@@ -19,8 +19,8 @@ return {
 
     local bubbles_theme = {
       normal = {
-        a = { fg = bubbleColors.black, bg = bubbleColors.blue },
-        b = { fg = bubbleColors.white, bg = bubbleColors.xcode_bg },
+        a = { fg = bubbleColors.black, bg = bubbleColors.blue  },
+        b = { fg = bubbleColors.white }, -- , bg = bubbleColors.xcode_bg
         -- c = { fg = bubbleColors.white },
       },
 
@@ -52,9 +52,12 @@ return {
       },
       sections = {
         -- lualine_a = { { 'mode', separator = { left = '' }, right_padding = 0 } },
-        lualine_b = { 'filename', 'branch' },
+        lualine_b = {},
         lualine_c = {
           '%=', --[[ add your center components here in place of this comment ]]
+           'filename',
+           'branch',
+           'filetype'
         },
         lualine_x = {
           {
@@ -63,7 +66,7 @@ return {
             color = { fg = "#ff9e64" },
           },
         },
-        lualine_y = { 'encoding','fileformat', 'filetype', 'lazy_status', 'progress' },
+        lualine_y = { 'encoding','fileformat', 'lazy_status', 'progress' }, -- , 'filetype'
         lualine_z = {
           { 'location', left_padding = 0 }, --separator = { right = '' }
         },
