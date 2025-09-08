@@ -2,7 +2,7 @@
 
 this is my personal all-in-one setup
 
-<img width="1674" alt="Screenshot 2025-02-06 at 6 43 23 PM" src="https://github.com/user-attachments/assets/fb08a6b9-ec30-4547-85e1-8f3c1ea90c3e" />
+<img width="1674" alt="Screenshot 2025-02-06 at 6 43 23 PM" src="./nvim_ss.png" />
 
 
 # HOW TO INSTALL AND USE MY CONFIGURATION
