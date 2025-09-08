@@ -54,8 +54,11 @@ or download it as zip
 - `vim-maximizer.nvim`
 - `which-key.nvim`
 - `tmux.nvim`
+- `gemini.nvim`
+- `claude-code.nvim`
+- `yazi.nvim`
 
-Keybinds will be linked if interested.
+Keybinds will be uploaded soon.
 
 ## Neovim Configuration Resources <br>
 https://neovim.io/doc/ <br>
